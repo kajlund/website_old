@@ -30,6 +30,9 @@ MONGO_URI=    # URI to your mongodb database
 
 - Traditional server-side rendering was implemented using [Nunjucks](https://mozilla.github.io/nunjucks/) templating language.
 
+- The app uses [Sendgrid](https://sendgrid.com/) and [nodemailer](https://nodemailer.com/about/) for sending emails.
+
+
 - UI implemented using [Bootstrap 5](https://getbootstrap.com/docs/5.1/) and  [Bootstrap Icons](https://icons.getbootstrap.com/)
 - For serv er-side validation I usewd [Validator](https://github.com/validatorjs/validator.js)
 - [Academind - NodeJS The complete guide](https://www.udemy.com/course/nodejs-the-complete-guide/l) among other courses inspired to build this site.

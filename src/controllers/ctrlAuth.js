@@ -1,5 +1,6 @@
 // const log = require('../utils/log')
 const SvcAuth = require('../services/svcAuth');
+const SvcMail = require('../services/svcMailer');
 const SvcUsr = require('../services/svcUser');
 
 class AuthController {
@@ -73,6 +74,7 @@ class AuthController {
 
     // Signup with valid data, create new user
     await SvcUsr.createUser(data);
+    await SvcMail.sendAccountRegistrationMail(data.email);
     res.redirect('/logon');
   }
 }

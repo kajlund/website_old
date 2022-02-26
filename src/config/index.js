@@ -1,16 +1,16 @@
-const fs = require('fs')
-const path = require('path')
+const fs = require('fs');
+const path = require('path');
 
-const _ = require('lodash')
-const dotenv = require('dotenv')
+const _ = require('lodash');
+const dotenv = require('dotenv');
 
 // Load environment variables BEFORE setting up config
-dotenv.config({ path: path.join(__dirname, '..', '..', '.env') })
+dotenv.config({ path: path.join(__dirname, '..', '..', '.env') });
 
-const env = process.env.NODE_ENV || 'development'
-const isDev = env === 'development'
-const isTest = env === 'testing'
-const port = parseInt(process.env.PORT, 10) || 3000
+const env = process.env.NODE_ENV || 'development';
+const isDev = env === 'development';
+const isTest = env === 'testing';
+const port = parseInt(process.env.PORT, 10) || 3000;
 
 // Default Configuration
 const baseConfig = {
@@ -33,17 +33,20 @@ const baseConfig = {
       },
     },
   },
-}
+  mail: {
+    apiKey: process.env.SENDGRID_API_KEY,
+  },
+};
 
 // Check if config file for set environment exists
-let envConfig = {}
-const envConfigFile = path.join(process.cwd(), `${env}.js`)
+let envConfig = {};
+const envConfigFile = path.join(process.cwd(), `${env}.js`);
 if (fs.existsSync(envConfigFile)) {
   // eslint-disable-next-line global-require
-  envConfig = require(envConfigFile)
+  envConfig = require(envConfigFile);
 }
 
 // Merge configurations
-const config = _.merge(baseConfig, envConfig)
+const config = _.merge(baseConfig, envConfig);
 
-module.exports = config
+module.exports = config;
