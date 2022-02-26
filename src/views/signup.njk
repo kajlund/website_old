@@ -1,0 +1,28 @@
+{% extends "base.njk" %}
+
+{% block content %}
+<form method="POST" action="/signup">
+<div class="mb-3">
+    <label for="handle" class="form-label">Nickname</label>
+    <input type="text" class="form-control" name="handle" id="handle" aria-describedby="handleHelp">
+    <div id="handleHelp" class="form-text">Your nickname or handle.</div>
+  </div>
+  <div class="mb-3">
+    <label for="email" class="form-label">Email address</label>
+    <input type="email" class="form-control" name="email" id="email" aria-describedby="emailHelp">
+    <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
+  </div>
+  <div class="mb-3">
+    <label for="pwd" class="form-label">Password</label>
+    <input type="password" class="form-control" name="password" id="pwd" aria-describedby="pwdHelp">
+    <div id="pwdHelp" class="form-text">Must be at least 8 characters long.</div>
+  </div>
+  <div class="mb-3">
+    <label for="pwdConfirm" class="form-label">Password Confirmation</label>
+    <input type="password" class="form-control" name="confirmPassword" id="pwdConfirm" aria-describedby="pwdConfirmHelp">
+    <div id="pwdConfirmHelp" class="form-text">Needs to match password</div>
+  </div>
+  <input type="hidden" name="_csrf" value="{{ csrfToken }}">
+  <button type="submit" class="btn btn-primary">Signup</button>
+</form>
+{% endblock %}
