@@ -1,0 +1,20 @@
+{% extends "base.njk" %}
+
+{% block content %}
+<div class="alert alert-secondary clearfix">
+  <h1 class="d-inline"><i class="bi-chat-quote" role="img" aria-label="Proverbs"></i> Proverbs</h1>
+  <a href=" /proverbs/0/edit" class="btn btn-outline-secondary btn-lg float-end" role="button" aria-disabled="false">Add</a>
+</div>
+
+<div class="list-group">
+{% for pv in proverbs %}
+  <a href="/proverbs/{{pv.id}}/view" class="list-group-item list-group-item-action" aria-current="false">
+    {{ pv.title }} <i class="bi-chevron-right float-end"></i>
+  </a>
+  {% else %}
+    <a href="" class="list-group-item list-group-item-action active" aria-current="true">
+      No proverbs added
+    </a>
+  {% endfor %}
+</div>
+{% endblock %}

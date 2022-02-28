@@ -1,0 +1,51 @@
+{% extends "base.njk" %}
+
+{% block content %}
+<div class="alert alert-secondary clearfix">
+  <h1 class="d-inline"><i class="bi-chat-quote" role="img" aria-label="Proverb"></i> {{ title }}</h1>
+  <a href="/proverbs" class="btn btn-outline-secondary btn-lg float-end" role="button" aria-disabled="false">
+    <i class="bi-chevron-left"></i> Back
+  </a>
+</div>
+
+<div class="card">
+  <div class="card-body">
+    <p class="card-text"><i class="bi bi-quote"></i>{{ proverb.content }}<i class="bi bi-quote"></i></p>
+    <p class="card-text"><small><i class="bi-dash-lg"></i>{{ proverb.author }} {{"-" if proverb.authorDesc }} {{ proverb.authorDesc }}</small></p>
+    <p class="card-text">
+      <small class="text-muted">
+        Category: {{ proverb.category }} | Created {{ proverb.createdAt | date("YYYY-MM-DD") }} | Updated {{ proverb.updatedAt | date("YYYY-MM-DD") }}
+      </small>
+    </p>
+  </div>
+  <div class="card-footer">
+    <a href="/proverbs/{{proverb.id}}/edit" class="btn btn-primary float-end ms-3">
+      <i class="bi-pencil"></i> Edit
+    </a>
+    <!-- Button trigger modal -->
+    <button type="button" class="btn btn-outline-danger float-end" data-bs-toggle="modal" data-bs-target="#deleteConfirmation">
+      <i class="bi-trash"></i> Delete
+    </button>
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="deleteConfirmation" tabindex="-1" aria-labelledby="deleteConfirmationLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="deleteConfirmationLabel">Delete Proverb?</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        {{proverb.content}}
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+        <a href="/proverbs/{{proverb.id}}/destroy" class="btn btn-outline-danger">OK</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% endblock %}

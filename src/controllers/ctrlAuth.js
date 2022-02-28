@@ -5,7 +5,7 @@ const SvcUsr = require('../services/svcUser');
 
 class AuthController {
   static isAuth(req, res, next) {
-    if (!req.session.isLoggedIn) {
+    if (!req.session.isAuthenticated) {
       return res.redirect('/login');
     }
     next();
@@ -18,7 +18,7 @@ class AuthController {
     };
 
     const { errors, user } = await SvcAuth.validateLogon(data);
-    if (errors) {
+    if (errors.length) {
       req.flash('errors', errors.split(','));
       return res.redirect('/logon');
     }

@@ -1,0 +1,63 @@
+{% extends "base.njk" %}
+
+{% block content %}
+
+<div class="alert alert-secondary clearfix">
+  <h1 class="d-inline"><i class="bi-chat-quote" role="img" aria-label="Edit Proverb"></i> {{ title }}</h1>
+</div>
+
+<form method="POST" action="/proverbs">
+  {% if errors.length %}
+    {% for err in errors %}
+      <div class="alert alert-danger alert-dismissible fade show" role="alert">
+        {{ err }}
+        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+      </div>
+    {% endfor %}
+  {% endif %}
+  <input type="hidden" name="dataid" value='{{ data.id }}'>
+  <div class="mb-3">
+    <label for="title" class="form-label">Title</label>
+    <input type="text" class="form-control" name="title" id="title"
+      value="{{ data.title }}" aria-describedby="titleHelp"
+    >
+    <div id="handleHelp" class="form-text">The proverb title.</div>
+  </div>
+  <div class="mb-3">
+    <label for="content" class="form-label">Content</label>
+    <textarea class="form-control" id="content" name="content" rows="5">{{ data.content }}</textarea>
+  </div>
+  <div class="mb-3">
+    <label for="author" class="form-label">Author</label>
+    <input type="text" class="form-control" name="author" id="author"
+      value="{{ data.author }}" aria-describedby="authorHelp"
+    >
+    <div id="authorHelp" class="form-text">Proverb author.</div>
+  </div>
+  <div class="mb-3">
+    <label for="authorDesc" class="form-label">Author Description</label>
+    <input type="text" class="form-control" name="authorDesc" id="authorDesc"
+      value="{{ data.authorDesc }}" aria-describedby="authorDescHelp"
+    >
+    <div id="authorDescHelp" class="form-text">Additional author info .</div>
+  </div>
+  <div class="mb-3">
+    <label for="categoryDataList" class="form-label">Category</label>
+    <select name="category" class="form-select" aria-label="Proverb Category">
+      <option {{ 'selected' if (data.category == '') }}>Select Category</option>
+      <option {{ 'selected' if data.category =='IT' }} value="IT">IT</option>
+      <option {{ 'selected' if data.category =='Love' }} value="Love">Love</option>
+      <option {{ 'selected' if data.category =='Misc' }} value="Misc">Misc</option>
+      <option {{ 'selected' if data.category =='Science' }} value="Science">Science</option>
+      <option {{ 'selected' if data.category =='Secular' }} value="Secular">Secular</option>
+    </select>
+  </div>
+  <input type="hidden" name="_csrf" value="{{ csrfToken }}">
+  <button type="submit" class="btn btn-primary float-end ms-3">Save</button>
+  {% if data.id %}
+    <a href="/proverbs/{{data.id}}/view" class="btn btn-outline-danger float-end">Cancel</a>
+  {% else %}
+    <a href="/proverbs" class="btn btn-outline-danger float-end">Cancel</a>
+  {% endif%}
+</form>
+{% endblock %}

@@ -12,6 +12,7 @@ const { StatusCodes, ReasonPhrases } = require('http-status-codes');
 require('express-async-errors'); // async wrapper
 const flash = require('connect-flash');
 const nunjucks = require('nunjucks');
+const dateFilter = require('nunjucks-date-filter');
 const session = require('express-session');
 const MongoDBStore = require('connect-mongodb-session')(session);
 
@@ -48,11 +49,12 @@ module.exports = (cnf) => {
   app.use(flash()); // Flash messages
 
   // Configure Nunjucks view engine
-  nunjucks.configure(path.join(__dirname, 'views'), {
+  const envNunjucks = nunjucks.configure(path.join(__dirname, 'views'), {
     autoescape: true,
     express: app,
     watch: true,
   });
+  envNunjucks.addFilter('date', dateFilter);
   app.set('view engine', 'njk');
 
   // Setup global template vars
